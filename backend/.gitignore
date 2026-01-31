@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Environment files (do not commit secrets)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+
+
