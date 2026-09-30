@@ -444,6 +444,24 @@ function updateTaskById(req, res) {
       ...(completedAt !== undefined ? { completed_at: completedAt } : {})
     };
 
+    // Keep DB constraint happy:
+    // chk_tasks_completed_when_done: (status <> 'done' OR completed_at IS NOT NULL)
+    // If UI moves task to Done, it only sends { status }, so we set completed_at automatically.
+    if (status !== undefined && completedAt === undefined) {
+      const nextStatus = normalizeTaskStatus(status);
+      const nextIsDone =
+        String(nextStatus || '').toLowerCase() === String(TASK_STATUS.DONE).toLowerCase();
+      const existingIsDone =
+        String(existing.status || '').toLowerCase() === String(TASK_STATUS.DONE).toLowerCase();
+
+      if (nextIsDone) {
+        payload.completed_at = new Date().toISOString();
+      } else if (existingIsDone) {
+        // If moving out of Done, clear completed_at (unless explicitly provided).
+        payload.completed_at = null;
+      }
+    }
+
     const updated = await taskRepository.updateById(id, payload);
     if (!updated) {
       const error = new Error('Task not found');

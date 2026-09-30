@@ -81,7 +81,7 @@ function normalizePriority(priority) {
   if (p === 'low') return TASK_PRIORITY.LOW;
   if (p === 'medium') return TASK_PRIORITY.MEDIUM;
   if (p === 'high') return TASK_PRIORITY.HIGH;
-  if (p === 'critical') return TASK_PRIORITY.CRITICAL;
+  if (p === 'critical' || p === 'urgent') return TASK_PRIORITY.URGENT;
   return null;
 }
 
@@ -91,10 +91,10 @@ function normalizePriority(priority) {
 function normalizeStatus(status) {
   if (!status) return null;
   const s = String(status).toLowerCase().trim();
-  if (s === 'pending') return TASK_STATUS.PENDING;
+  if (s === 'todo' || s === 'to do' || s === 'pending') return TASK_STATUS.TODO;
   if (s === 'in-progress' || s === 'in_progress') return TASK_STATUS.IN_PROGRESS;
-  if (s === 'completed') return TASK_STATUS.COMPLETED;
-  if (s === 'closed') return TASK_STATUS.CLOSED;
+  if (s === 'in review' || s === 'in_review') return TASK_STATUS.IN_REVIEW;
+  if (s === 'done' || s === 'completed' || s === 'closed') return TASK_STATUS.DONE;
   return null;
 }
 
@@ -207,18 +207,52 @@ async function findProjectByName(name, orgId) {
   if (!name) return null;
   
   try {
-    let query = db.from('projects').select('*').ilike('name', `%${name}%`).limit(1);
-    
+    const normalizedName = String(name).trim();
+    if (!normalizedName) return null;
+    const lowerName = normalizedName.toLowerCase();
+    const sanitizedName = lowerName.replace(/^project\s*:\s*/i, '').trim();
+
+    // Fetch candidate projects in scope once, then do strict matching in code.
+    let listQuery = db.from('projects').select('*').limit(100);
     if (orgId) {
-      query = query.eq('org_id', String(orgId));
+      listQuery = listQuery.eq('org_id', String(orgId));
     }
-    
-    const { data, error } = await query.maybeSingle();
-    if (error) {
-      console.error('[workflowExecutor] Error finding project:', error);
+
+    const { data: projects, error: listError } = await listQuery;
+    if (listError) {
+      console.error('[workflowExecutor] Error listing projects:', listError);
       return null;
     }
-    return data || null;
+
+    const candidates = (projects || []).filter(Boolean);
+    if (candidates.length === 0) return null;
+
+    const normalizeProjectName = (value) =>
+      String(value || '')
+        .toLowerCase()
+        .replace(/^project\s*:\s*/i, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    // 1) Exact match against raw or sanitized input (strict)
+    const exactMatches = candidates.filter((p) => {
+      const pn = normalizeProjectName(p.name);
+      return pn === lowerName || pn === sanitizedName;
+    });
+    if (exactMatches.length === 1) return exactMatches[0];
+    if (exactMatches.length > 1) return null; // ambiguous
+
+    // 2) Starts-with only if unique and long enough query
+    const searchKey = sanitizedName || lowerName;
+    if (searchKey.length >= 4) {
+      const startsWithMatches = candidates.filter((p) =>
+        normalizeProjectName(p.name).startsWith(searchKey)
+      );
+      if (startsWithMatches.length === 1) return startsWithMatches[0];
+    }
+
+    // No reliable unique match -> force caller to ask user instead of wrong routing.
+    return null;
   } catch (error) {
     console.error('[workflowExecutor] Error finding project:', error);
     return null;
@@ -331,7 +365,7 @@ async function executeCreateProject(action, req) {
       org_id: orgIdValue,
       name: String(name).trim(),
       description: null,
-      status: null,
+      status: 'planning',
       start_date: startDate,
       end_date: null,
       created_by: userId
@@ -695,8 +729,8 @@ async function executeCreateTask(action, req) {
     const taskPayload = {
       title: String(title).trim(),
       description: null,
-      status: null,
-      priority: normalizedPriority,
+      status: TASK_STATUS.TODO,
+      priority: normalizedPriority || TASK_PRIORITY.MEDIUM,
       due_date: dueDate,
       project_id: String(projectObj.id),
       assignee_id: assigneeUser ? String(assigneeUser.id) : null,

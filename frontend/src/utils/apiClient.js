@@ -116,32 +116,32 @@ class ApiClient {
    * Make POST request (invalidates related cache)
    */
   async post(endpoint, data, options = {}) {
+    const { invalidateCache, timeoutMs, ...fetchOptions } = options
     // Invalidate related cache patterns
-    if (options.invalidateCache) {
-      const patterns = Array.isArray(options.invalidateCache) 
-        ? options.invalidateCache 
-        : [options.invalidateCache]
+    if (invalidateCache) {
+      const patterns = Array.isArray(invalidateCache) ? invalidateCache : [invalidateCache]
       patterns.forEach(pattern => apiCache.invalidate(pattern))
     }
+    const effectiveTimeout = typeof timeoutMs === 'number' && timeoutMs > 0 ? timeoutMs : this.timeout
     const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), this.timeout)
+    const timeoutId = setTimeout(() => controller.abort(), effectiveTimeout)
     const isFormData = typeof FormData !== 'undefined' && data instanceof FormData
 
     try {
       const response = await fetch(`${this.baseURL}${endpoint}`, {
         method: 'POST',
-        headers: isFormData ? { ...(options.headers || {}) } : this.getHeaders(options.headers),
+        headers: isFormData ? { ...(fetchOptions.headers || {}) } : this.getHeaders(fetchOptions.headers),
         body: isFormData ? data : JSON.stringify(data),
         credentials: 'include',
         signal: controller.signal,
-        ...options,
+        ...fetchOptions,
       })
       clearTimeout(timeoutId)
       return this.handleResponse(response)
     } catch (error) {
       clearTimeout(timeoutId)
       if (error.name === 'AbortError') {
-        throw new Error(`Request timeout after ${this.timeout}ms`)
+        throw new Error(`Request timeout after ${effectiveTimeout}ms`)
       }
       throw error
     }

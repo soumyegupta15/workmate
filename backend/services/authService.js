@@ -108,6 +108,7 @@ async function verifySignupOtp({ email, otp }) {
     throw new Error('Supabase admin client is not configured (service role key missing)');
   }
 
+  let authUser = null;
   // Create user directly via admin API and mark email as confirmed
   const { data, error } = await adminAuth.auth.admin.createUser({
     email,
@@ -116,26 +117,46 @@ async function verifySignupOtp({ email, otp }) {
   });
 
   if (error) {
-    throw new Error(error.message || 'Failed to sign up user with Supabase');
+    const alreadyRegistered = /already.*registered/i.test(String(error.message || ''));
+    if (!alreadyRegistered) {
+      throw new Error(error.message || 'Failed to sign up user with Supabase');
+    }
+
+    // If user was already created in auth (e.g. retry), recover and continue.
+    const { data: listedUsers, error: listError } = await adminAuth.auth.admin.listUsers();
+    if (listError) {
+      throw new Error(listError.message || 'Failed to look up existing user in Supabase');
+    }
+    authUser = (listedUsers?.users || []).find(
+      (u) => String(u.email || '').toLowerCase() === String(email).toLowerCase()
+    ) || null;
+
+    if (!authUser) {
+      throw new Error('User exists in auth but could not be resolved. Please try again.');
+    }
+  } else {
+    authUser = data?.user || null;
   }
 
   const passwordHash = await hashPassword(entry.password);
 
-  await userRepository.insertOne({
-    email,
-    name: entry.name || null,
-    password_hash: passwordHash,
-    profile_image_url: null,
-    status: USER_STATUS.ACTIVE,
-    updated_at: null,
-    is_admin: !!entry.isAdmin
-  });
+  const existingProfile = await userRepository.findByEmail(email);
+  if (!existingProfile) {
+    await userRepository.insertOne({
+      email,
+      name: entry.name || null,
+      password_hash: passwordHash,
+      profile_image_url: null,
+      status: USER_STATUS.ACTIVE,
+      is_admin: !!entry.isAdmin
+    });
+  }
 
   signupOtps.delete(email);
 
   return {
     message: 'Signup successful',
-    user: data.user
+    user: authUser
   };
 }
 

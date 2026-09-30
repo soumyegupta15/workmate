@@ -230,25 +230,79 @@ async function callOllama(prompt) {
 }
 
 /**
- * Parse AI response to extract JSON
+ * Pull JSON out of ```json ... ``` or ``` ... ``` fences (models often wrap output this way).
  */
-function extractJSON(text) {
-  // Try to find JSON in the response
-  const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (jsonMatch) {
-    try {
-      return JSON.parse(jsonMatch[0]);
-    } catch (error) {
-      console.error('Failed to parse JSON:', error);
+function stripMarkdownCodeFences(raw) {
+  let t = String(raw || '').trim();
+  const fenced = t.match(/```(?:json|JSON)?\s*([\s\S]*?)```/);
+  if (fenced) return fenced[1].trim();
+  t = t.replace(/^```(?:json|JSON)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+  return t;
+}
+
+/**
+ * From first '{', find the matching '}' so we do not greedily swallow extra text after the object.
+ */
+function extractBalancedJsonObject(s) {
+  const str = String(s || '');
+  const start = str.indexOf('{');
+  if (start === -1) return null;
+  let depth = 0;
+  let inString = false;
+  let escape = false;
+  for (let i = start; i < str.length; i++) {
+    const c = str[i];
+    if (escape) {
+      escape = false;
+      continue;
+    }
+    if (inString) {
+      if (c === '\\') {
+        escape = true;
+        continue;
+      }
+      if (c === '"') inString = false;
+      continue;
+    }
+    if (c === '"') {
+      inString = true;
+      continue;
+    }
+    if (c === '{') depth += 1;
+    if (c === '}') {
+      depth -= 1;
+      if (depth === 0) return str.slice(start, i + 1);
     }
   }
-  
-  // If no JSON found, try parsing the whole text
-  try {
-    return JSON.parse(text.trim());
-  } catch (error) {
-    throw new Error(`Failed to parse AI response as JSON: ${text.substring(0, 200)}`);
+  return null;
+}
+
+/**
+ * Parse AI response to extract JSON (handles markdown fences + trailing model chatter).
+ */
+function extractJSON(text) {
+  const cleaned = stripMarkdownCodeFences(text);
+  const candidates = [cleaned, String(text || '').trim()].filter(Boolean);
+
+  for (const chunk of candidates) {
+    const balanced = extractBalancedJsonObject(chunk);
+    if (balanced) {
+      try {
+        return JSON.parse(balanced);
+      } catch (err) {
+        console.error('[aiService] JSON.parse balanced failed:', err.message);
+      }
+    }
+    try {
+      return JSON.parse(chunk.trim());
+    } catch {
+      // continue
+    }
   }
+
+  throw new Error(
+    `Failed to parse AI response as JSON: ${String(text).substring(0, 200)}`
+  );
 }
 
 /**
@@ -311,6 +365,15 @@ Return ONLY valid JSON. No explanations, no markdown, no code blocks. Just the J
 function postProcessAction(action, originalPrompt) {
   const prompt = originalPrompt.toLowerCase();
   
+  function cleanProjectName(value) {
+    const raw = String(value || '').trim();
+    if (!raw) return '';
+    return raw
+      .replace(/^project\s*:\s*/i, '')
+      .replace(/^project\s+/i, '')
+      .trim();
+  }
+  
   // For add_project_member, try to extract fields
   if (action.action === 'add_project_member' || prompt.includes('add') && (prompt.includes('member') || prompt.includes('to project'))) {
     if (!action.data) {
@@ -348,33 +411,54 @@ function postProcessAction(action, originalPrompt) {
       action.data = {};
     }
     
+    // Pattern 0: "in Project: [PROJECT] project"
+    const projectColonPattern = originalPrompt.match(/in\s+project\s*:\s*([^"']+?)(?:\s+project)?(?:\s+and|\s+assign|$)/i);
+    if (projectColonPattern && projectColonPattern[1]) {
+      action.data.project = cleanProjectName(projectColonPattern[1]);
+    }
+
     // Pattern 1: "Create a task called [TITLE] and assign it to [NAME] in [PROJECT] project"
-    const pattern1 = originalPrompt.match(/create\s+(?:a\s+)?task\s+called\s+([^"']+?)\s+and\s+assign\s+it\s+to\s+([^"']+?)\s+in\s+([^"']+?)(?:\s+project)?/i);
+    const pattern1 = originalPrompt.match(/create\s+(?:a\s+)?task\s+called\s+([^"']+?)\s+and\s+assign\s+it\s+to\s+([^"']+?)\s+in\s+([^"']+?)(?:\s+project)?(?:\s+with|\s+and|$)/i);
     if (pattern1) {
       action.data.title = pattern1[1].trim();
       action.data.assignee = pattern1[2].trim();
-      action.data.project = pattern1[3].trim();
+      action.data.project = cleanProjectName(pattern1[3]);
       console.log('[aiService] Post-processed using pattern 1:', action.data);
       return action;
     }
     
     // Pattern 2: "Create task [TITLE] for [NAME] in [PROJECT]"
-    const pattern2 = originalPrompt.match(/create\s+task\s+([^"']+?)\s+for\s+([^"']+?)\s+in\s+([^"']+?)(?:\s+project)?/i);
+    const pattern2 = originalPrompt.match(/create\s+task\s+([^"']+?)\s+for\s+([^"']+?)\s+in\s+([^"']+?)(?:\s+project)?(?:\s+with|\s+and|$)/i);
     if (pattern2) {
       action.data.title = pattern2[1].trim();
       action.data.assignee = pattern2[2].trim();
-      action.data.project = pattern2[3].trim();
+      action.data.project = cleanProjectName(pattern2[3]);
       console.log('[aiService] Post-processed using pattern 2:', action.data);
       return action;
     }
     
     // Pattern 3: "Create [TITLE] task and assign to [NAME] in [PROJECT]"
-    const pattern3 = originalPrompt.match(/create\s+([^"']+?)\s+task\s+and\s+assign\s+to\s+([^"']+?)\s+in\s+([^"']+?)(?:\s+project)?/i);
+    const pattern3 = originalPrompt.match(/create\s+([^"']+?)\s+task\s+and\s+assign\s+to\s+([^"']+?)\s+in\s+([^"']+?)(?:\s+project)?(?:\s+with|\s+and|$)/i);
     if (pattern3) {
       action.data.title = pattern3[1].trim();
       action.data.assignee = pattern3[2].trim();
-      action.data.project = pattern3[3].trim();
+      action.data.project = cleanProjectName(pattern3[3]);
       console.log('[aiService] Post-processed using pattern 3:', action.data);
+      return action;
+    }
+
+    // Pattern 4: "Create a task [TITLE] assign to [NAME] in [PROJECT] with [priority] priority"
+    const pattern4 = originalPrompt.match(
+      /create\s+(?:a\s+)?task\s+(.+?)\s+assign\s+to\s+(.+?)\s+in\s+(.+?)(?:\s+with\s+(\w+)\s+priority)?(?:\s+project)?$/i
+    );
+    if (pattern4) {
+      action.data.title = pattern4[1].trim();
+      action.data.assignee = pattern4[2].trim();
+      action.data.project = cleanProjectName(pattern4[3]);
+      if (pattern4[4]) {
+        action.data.priority = String(pattern4[4]).trim().toLowerCase();
+      }
+      console.log('[aiService] Post-processed using pattern 4:', action.data);
       return action;
     }
     
@@ -398,7 +482,24 @@ function postProcessAction(action, originalPrompt) {
       // Look for patterns like "in X project", "under X", "for X project"
       const projectMatch = originalPrompt.match(/(?:in|under|for)\s+([^"']+?)(?:\s+project)?(?:\s+and|\s+assign|$)/i);
       if (projectMatch && projectMatch[1]) {
-        action.data.project = projectMatch[1].trim();
+        action.data.project = cleanProjectName(projectMatch[1]);
+      }
+    }
+    
+    if (action.data.project) {
+      action.data.project = cleanProjectName(action.data.project);
+    }
+    
+    // If project extraction became too short (e.g., "P"), recover from explicit "Project: ..."
+    if (action.data.project && action.data.project.length <= 2) {
+      const recoverColon = originalPrompt.match(/project\s*:\s*([^"']+?)(?:\s+project|\s+with|\s+and|$)/i);
+      if (recoverColon && recoverColon[1]) {
+        action.data.project = cleanProjectName(recoverColon[1]);
+      } else {
+        const recoverInProject = originalPrompt.match(/in\s+([^"']+?)\s+project(?:\s+with|\s+and|$)/i);
+        if (recoverInProject && recoverInProject[1]) {
+          action.data.project = cleanProjectName(recoverInProject[1]);
+        }
       }
     }
     

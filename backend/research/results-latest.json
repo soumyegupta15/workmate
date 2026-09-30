@@ -1,0 +1,1680 @@
+{
+  "generatedAt": "2026-05-07T11:30:07.896Z",
+  "datasetSize": 20,
+  "summary": [
+    {
+      "method": "rule-based",
+      "total": 20,
+      "intentAccuracy": 0.85,
+      "exactMatchAccuracy": 0.5,
+      "fieldAccuracy": 0.6027397260273972,
+      "avgLatencyMs": 0.1,
+      "failRate": 0
+    },
+    {
+      "method": "llm-only",
+      "total": 20,
+      "intentAccuracy": 0.15,
+      "exactMatchAccuracy": 0,
+      "fieldAccuracy": 0.0410958904109589,
+      "avgLatencyMs": 5349.15,
+      "failRate": 0.05
+    },
+    {
+      "method": "hybrid",
+      "total": 20,
+      "intentAccuracy": 0.95,
+      "exactMatchAccuracy": 0.4,
+      "fieldAccuracy": 0.6986301369863014,
+      "avgLatencyMs": 3279.4,
+      "failRate": 0
+    }
+  ],
+  "details": {
+    "ruleBased": [
+      {
+        "id": "c01",
+        "prompt": "Create a task called API Integration and assign it to Tanmay in Core Platform project with high priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "API Integration",
+            "assignee": "Tanmay",
+            "project": "Core Platform",
+            "priority": "high"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "API Integration",
+            "assignee": "Tanmay",
+            "project": "Core Platform",
+            "priority": "high"
+          }
+        },
+        "latencyMs": 1,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 5,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c02",
+        "prompt": "Create a task called UI Polish and assign it to Rohan in Core Platform project",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "UI Polish",
+            "assignee": "Rohan",
+            "project": "Core Platform"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "UI Polish",
+            "assignee": "Rohan",
+            "project": "Core Platform"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 4,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c03",
+        "prompt": "Add project member Priya to project Core Platform",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Priya",
+            "project": "Core Platform"
+          }
+        },
+        "actual": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Priya",
+            "project": "Core Platform"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c04",
+        "prompt": "Create project called AI Sprint starting tomorrow",
+        "expected": {
+          "action": "create_project",
+          "data": {
+            "name": "AI Sprint",
+            "start_date": "tomorrow"
+          }
+        },
+        "actual": {
+          "action": "create_project",
+          "data": {
+            "name": "AI Sprint",
+            "start_date": "tomorrow"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c05",
+        "prompt": "Update task API Integration to in progress",
+        "expected": {
+          "action": "update_task",
+          "filters": {
+            "title": "API Integration"
+          },
+          "update": {
+            "status": "in_progress"
+          }
+        },
+        "actual": {
+          "action": "update_task",
+          "filters": {
+            "title": "API Integration"
+          },
+          "update": {
+            "status": "in_progress"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c06",
+        "prompt": "Assign task UI Polish to Amit by next week",
+        "expected": {
+          "action": "assign",
+          "filters": {
+            "title": "UI Polish"
+          },
+          "update": {
+            "assignee": "Amit",
+            "due_date": "next week"
+          }
+        },
+        "actual": {
+          "action": "assign",
+          "filters": {
+            "title": "UI Polish"
+          },
+          "update": {
+            "assignee": "Amit",
+            "due_date": "next week"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 4,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c07",
+        "prompt": "Comment on task API Integration: add retry logic",
+        "expected": {
+          "action": "comment",
+          "filters": {
+            "title": "API Integration"
+          },
+          "data": {
+            "body": "add retry logic"
+          }
+        },
+        "actual": {
+          "action": "comment",
+          "filters": {
+            "title": "API Integration"
+          },
+          "data": {
+            "body": "add retry logic"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c08",
+        "prompt": "Create a task called Benchmark Charts and assign it to Priya in Research & Benchmarking project with medium priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "Benchmark Charts",
+            "assignee": "Priya",
+            "project": "Research & Benchmarking",
+            "priority": "medium"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "Benchmark Charts",
+            "assignee": "Priya",
+            "project": "Research & Benchmarking",
+            "priority": "medium"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 5,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c09",
+        "prompt": "Create task Dataset Cleaning for Amit in Research & Benchmarking project",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "Dataset Cleaning",
+            "assignee": "Amit",
+            "project": "Research & Benchmarking"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {}
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.25,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "c10",
+        "prompt": "Add Tanmay to Project: AI Command Engine project",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Tanmay",
+            "project": "AI Command Engine"
+          }
+        },
+        "actual": {
+          "action": "unknown"
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n01",
+        "prompt": "create task api integratn for tanmay in core platform",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "api integratn",
+            "assignee": "tanmay",
+            "project": "core platform"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {}
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.25,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n02",
+        "prompt": "pls add rohan to core platform project",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "rohan",
+            "project": "core platform"
+          }
+        },
+        "actual": {
+          "action": "unknown"
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n03",
+        "prompt": "mk task model tuning assign amit project ai command engine",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "model tuning",
+            "assignee": "amit",
+            "project": "ai command engine"
+          }
+        },
+        "actual": {
+          "action": "assign",
+          "filters": {},
+          "update": {}
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n04",
+        "prompt": "update task api integration status done",
+        "expected": {
+          "action": "update_task",
+          "filters": {
+            "title": "api integration"
+          },
+          "update": {
+            "status": "done"
+          }
+        },
+        "actual": {
+          "action": "update_task",
+          "filters": {
+            "title": "api integration"
+          },
+          "update": {
+            "status": "done"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "n05",
+        "prompt": "create project called research v2 lead priya",
+        "expected": {
+          "action": "create_project",
+          "data": {
+            "name": "research v2",
+            "team_lead": "priya"
+          }
+        },
+        "actual": {
+          "action": "create_project",
+          "data": {
+            "name": "research v2 lead priya"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.3333333333333333,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n06",
+        "prompt": "assign ui polish to rohan due tomorrow",
+        "expected": {
+          "action": "assign",
+          "filters": {
+            "title": "ui polish"
+          },
+          "update": {
+            "assignee": "rohan",
+            "due_date": "tomorrow"
+          }
+        },
+        "actual": {
+          "action": "assign",
+          "filters": {
+            "title": "ui polish"
+          },
+          "update": {
+            "assignee": "rohan due tomorrow"
+          }
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 2,
+        "fieldAccuracy": 0.5,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n07",
+        "prompt": "add comment in api integration task fix auth cache",
+        "expected": {
+          "action": "comment",
+          "filters": {
+            "title": "api integration"
+          },
+          "data": {
+            "body": "fix auth cache"
+          }
+        },
+        "actual": {
+          "action": "comment",
+          "data": {}
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.3333333333333333,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n08",
+        "prompt": "create task called otp stability assign tanmay in project: ai command engine with high priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "otp stability",
+            "assignee": "tanmay",
+            "project": "ai command engine",
+            "priority": "high"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {}
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.2,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n09",
+        "prompt": "create benchmark-report task for priya under research & benchmarking",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "benchmark-report",
+            "assignee": "priya",
+            "project": "research & benchmarking"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {}
+        },
+        "latencyMs": 0,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.25,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n10",
+        "prompt": "add project member amit to project: ai command engine",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "amit",
+            "project": "ai command engine"
+          }
+        },
+        "actual": {
+          "action": "add_project_member",
+          "data": {
+            "user": "amit",
+            "project": "ai command engine"
+          }
+        },
+        "latencyMs": 1,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      }
+    ],
+    "llmOnly": [
+      {
+        "id": "c01",
+        "prompt": "Create a task called API Integration and assign it to Tanmay in Core Platform project with high priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "API Integration",
+            "assignee": "Tanmay",
+            "project": "Core Platform",
+            "priority": "high"
+          }
+        },
+        "actual": {
+          "task": {
+            "name": "API Integration",
+            "priority": "high",
+            "assignee": "Tanmay"
+          },
+          "project": "Core Platform project"
+        },
+        "latencyMs": 2655,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c02",
+        "prompt": "Create a task called UI Polish and assign it to Rohan in Core Platform project",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "UI Polish",
+            "assignee": "Rohan",
+            "project": "Core Platform"
+          }
+        },
+        "actual": {
+          "taskName": "UI Polish",
+          "projectName": "Core Platform",
+          "assignedTo": {
+            "name": "Rohan"
+          },
+          "description": "Enhance the user interface of Core Platform for better aesthetics and usability.",
+          "filters": [],
+          "updateRequired": false
+        },
+        "latencyMs": 3459,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c03",
+        "prompt": "Add project member Priya to project Core Platform",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Priya",
+            "project": "Core Platform"
+          }
+        },
+        "actual": {
+          "action": "add_member",
+          "project_id": "CorePlatformProject123",
+          "members": [
+            {
+              "name": "Priya",
+              "role": "developer"
+            }
+          ]
+        },
+        "latencyMs": 2680,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c04",
+        "prompt": "Create project called AI Sprint starting tomorrow",
+        "expected": {
+          "action": "create_project",
+          "data": {
+            "name": "AI Sprint",
+            "start_date": "tomorrow"
+          }
+        },
+        "actual": {
+          "action": "error",
+          "error": "Request timeout after 25000ms"
+        },
+        "latencyMs": 25003,
+        "error": "Request timeout after 25000ms",
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c05",
+        "prompt": "Update task API Integration to in progress",
+        "expected": {
+          "action": "update_task",
+          "filters": {
+            "title": "API Integration"
+          },
+          "update": {
+            "status": "in_progress"
+          }
+        },
+        "actual": {
+          "status": "in_progress",
+          "task_id": "TASK1234567890",
+          "api_integration": {
+            "name": "Task API Integration Update",
+            "description": "Updating the task management system to integrate with a new external Task Management API.",
+            "action": "update"
+          }
+        },
+        "latencyMs": 3550,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c06",
+        "prompt": "Assign task UI Polish to Amit by next week",
+        "expected": {
+          "action": "assign",
+          "filters": {
+            "title": "UI Polish"
+          },
+          "update": {
+            "assignee": "Amit",
+            "due_date": "next week"
+          }
+        },
+        "actual": {
+          "action": "assign",
+          "task_name": "UI Polish for Task Management App",
+          "employee_name": "Amit",
+          "deadline": "next week"
+        },
+        "latencyMs": 2055,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.25,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "c07",
+        "prompt": "Comment on task API Integration: add retry logic",
+        "expected": {
+          "action": "comment",
+          "filters": {
+            "title": "API Integration"
+          },
+          "data": {
+            "body": "add retry logic"
+          }
+        },
+        "actual": {
+          "action": "parse_error"
+        },
+        "latencyMs": 11212,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c08",
+        "prompt": "Create a task called Benchmark Charts and assign it to Priya in Research & Benchmarking project with medium priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "Benchmark Charts",
+            "assignee": "Priya",
+            "project": "Research & Benchmarking",
+            "priority": "medium"
+          }
+        },
+        "actual": {
+          "task": {
+            "name": "Benchmark Charts",
+            "project_name": "Research & Benchmarking",
+            "priority": "medium"
+          }
+        },
+        "latencyMs": 2117,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c09",
+        "prompt": "Create task Dataset Cleaning for Amit in Research & Benchmarking project",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "Dataset Cleaning",
+            "assignee": "Amit",
+            "project": "Research & Benchmarking"
+          }
+        },
+        "actual": {
+          "action": "parse_error"
+        },
+        "latencyMs": 4158,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c10",
+        "prompt": "Add Tanmay to Project: AI Command Engine project",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Tanmay",
+            "project": "AI Command Engine"
+          }
+        },
+        "actual": {
+          "action": "add_member",
+          "data": {
+            "project_name": "AI Command Engine",
+            "person_to_add": "Tanmay"
+          },
+          "filters": null,
+          "update": "Project team has been updated to include Tanmay."
+        },
+        "latencyMs": 3089,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n01",
+        "prompt": "create task api integratn for tanmay in core platform",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "api integratn",
+            "assignee": "tanmay",
+            "project": "core platform"
+          }
+        },
+        "actual": {
+          "action": "CreateTaskAPIIntegration",
+          "api_name": "TanmayCorePlatformTasks",
+          "description": "Integrate Tanmay's Core Platform with the task management API to streamline project workflow.",
+          "filters": [
+            {
+              "field": "projectId",
+              "condition": "equalTo"
+            },
+            {
+              "field": "taskStatus",
+              "condition": "notEqualTo",
+              "value": "completed"
+            }
+          ],
+          "update_data": [
+            {
+              "endpoint": "/api/tasks",
+              "method": "POST",
+              "body": {
+                "title": "${task.title}",
+                "description": "${task.description}",
+                "dueDate": "${task.due_date}"
+              }
+            }
+          ]
+        },
+        "latencyMs": 10288,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n02",
+        "prompt": "pls add rohan to core platform project",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "rohan",
+            "project": "core platform"
+          }
+        },
+        "actual": {
+          "action": "add_member",
+          "data": {
+            "project_name": "Core Platform Project",
+            "new_member": {
+              "first_name": "Rohan",
+              "last_name": "Sharma"
+            }
+          },
+          "filters": null,
+          "update": true
+        },
+        "latencyMs": 3402,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n03",
+        "prompt": "mk task model tuning assign amit project ai command engine",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "model tuning",
+            "assignee": "amit",
+            "project": "ai command engine"
+          }
+        },
+        "actual": {
+          "action": "assign_task",
+          "data": {
+            "project_name": "Amit Project AI Command Engine",
+            "task_description": "Model tuning for the AI Command Engine"
+          },
+          "filters": [
+            {
+              "type": "department",
+              "value": "Research and Development"
+            },
+            {
+              "type": "expertise",
+              "value": "Machine Learning"
+            }
+          ],
+          "update_required": true,
+          "assignee": {
+            "name": "Amit"
+          }
+        },
+        "latencyMs": 5143,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n04",
+        "prompt": "update task api integration status done",
+        "expected": {
+          "action": "update_task",
+          "filters": {
+            "title": "api integration"
+          },
+          "update": {
+            "status": "done"
+          }
+        },
+        "actual": {
+          "action": "update",
+          "data": {
+            "integrationStatus": "done"
+          },
+          "filters": null,
+          "update": true
+        },
+        "latencyMs": 6134,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n05",
+        "prompt": "create project called research v2 lead priya",
+        "expected": {
+          "action": "create_project",
+          "data": {
+            "name": "research v2",
+            "team_lead": "priya"
+          }
+        },
+        "actual": {
+          "action": "CreateProject",
+          "data": {
+            "projectName": "Research V2",
+            "leadName": "Priya"
+          },
+          "filters": null,
+          "update": {}
+        },
+        "latencyMs": 2483,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n06",
+        "prompt": "assign ui polish to rohan due tomorrow",
+        "expected": {
+          "action": "assign",
+          "filters": {
+            "title": "ui polish"
+          },
+          "update": {
+            "assignee": "rohan",
+            "due_date": "tomorrow"
+          }
+        },
+        "actual": {
+          "action": "Assign",
+          "task": "UI Polish Tasks",
+          "recipient": {
+            "name": "Rohan"
+          },
+          "deadline": "Tomorrow"
+        },
+        "latencyMs": 2353,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.25,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n07",
+        "prompt": "add comment in api integration task fix auth cache",
+        "expected": {
+          "action": "comment",
+          "filters": {
+            "title": "api integration"
+          },
+          "data": {
+            "body": "fix auth cache"
+          }
+        },
+        "actual": {
+          "action": "comment",
+          "data": {
+            "task_id": "API-IntegrationTask1234567890",
+            "content": "Added comment to fix auth cache issue."
+          },
+          "filters": [],
+          "update": {}
+        },
+        "latencyMs": 2937,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.3333333333333333,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n08",
+        "prompt": "create task called otp stability assign tanmay in project: ai command engine with high priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "otp stability",
+            "assignee": "tanmay",
+            "project": "ai command engine",
+            "priority": "high"
+          }
+        },
+        "actual": {
+          "task": {
+            "name": "OTP Stability",
+            "description": "Ensure the One-Time Pad (OTP) system is stable within AI Command Engine.",
+            "priority": "high"
+          },
+          "assignee": {
+            "name": "Tanmay"
+          }
+        },
+        "latencyMs": 3312,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n09",
+        "prompt": "create benchmark-report task for priya under research & benchmarking",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "benchmark-report",
+            "assignee": "priya",
+            "project": "research & benchmarking"
+          }
+        },
+        "actual": {
+          "action": "Create",
+          "task": {
+            "name": "Benchmark Report Task",
+            "description": "Generate a comprehensive report on the performance of PRIPA's latest research findings.",
+            "assignedTo": "PRIA"
+          },
+          "filters": [
+            {
+              "name": "Research Topic",
+              "value": "Latest Findings in Quantum Computing Research by PRIA"
+            }
+          ],
+          "updateFrequency": "Monthly",
+          "startDate": "2023-04-15",
+          "endDate": null,
+          "status": "Pending"
+        },
+        "latencyMs": 6231,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "n10",
+        "prompt": "add project member amit to project: ai command engine",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "amit",
+            "project": "ai command engine"
+          }
+        },
+        "actual": {
+          "action": "add_member",
+          "project_name": "AI Command Engine",
+          "team_members": [
+            "Amit"
+          ]
+        },
+        "latencyMs": 4722,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "c01",
+        "prompt": "Create a task called API Integration and assign it to Tanmay in Core Platform project with high priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "API Integration",
+            "assignee": "Tanmay",
+            "project": "Core Platform",
+            "priority": "high"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "API Integration",
+            "assignee": "Tanmay",
+            "project": "Core Platform",
+            "priority": "high"
+          }
+        },
+        "latencyMs": 5250,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 5,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c02",
+        "prompt": "Create a task called UI Polish and assign it to Rohan in Core Platform project",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "UI Polish",
+            "assignee": "Rohan",
+            "project": "Core Platform"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "UI Polish",
+            "assignee": "Rohan",
+            "project": "Core Platform"
+          }
+        },
+        "latencyMs": 3063,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 4,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c03",
+        "prompt": "Add project member Priya to project Core Platform",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Priya",
+            "project": "Core Platform"
+          }
+        },
+        "actual": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Priya",
+            "project": "C"
+          }
+        },
+        "latencyMs": 1906,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 2,
+        "fieldAccuracy": 0.6666666666666666,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "c04",
+        "prompt": "Create project called AI Sprint starting tomorrow",
+        "expected": {
+          "action": "create_project",
+          "data": {
+            "name": "AI Sprint",
+            "start_date": "tomorrow"
+          }
+        },
+        "actual": {
+          "action": "create_project",
+          "data": {
+            "name": "AI Sprint"
+          },
+          "filters": {},
+          "update": {}
+        },
+        "latencyMs": 2697,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 2,
+        "fieldAccuracy": 0.6666666666666666,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "c05",
+        "prompt": "Update task API Integration to in progress",
+        "expected": {
+          "action": "update_task",
+          "filters": {
+            "title": "API Integration"
+          },
+          "update": {
+            "status": "in_progress"
+          }
+        },
+        "actual": {
+          "action": "update_task",
+          "filters": {
+            "title": "[TITLE]"
+          },
+          "update": {}
+        },
+        "latencyMs": 2312,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.3333333333333333,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "c06",
+        "prompt": "Assign task UI Polish to Amit by next week",
+        "expected": {
+          "action": "assign",
+          "filters": {
+            "title": "UI Polish"
+          },
+          "update": {
+            "assignee": "Amit",
+            "due_date": "next week"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "UI Polish",
+            "assignee": "Amit",
+            "project": "workmate"
+          },
+          "due_date": "next week"
+        },
+        "latencyMs": 3389,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 0,
+        "fieldAccuracy": 0,
+        "exact": false,
+        "intentCorrect": false
+      },
+      {
+        "id": "c07",
+        "prompt": "Comment on task API Integration: add retry logic",
+        "expected": {
+          "action": "comment",
+          "filters": {
+            "title": "API Integration"
+          },
+          "data": {
+            "body": "add retry logic"
+          }
+        },
+        "actual": {
+          "action": "comment",
+          "filters": {
+            "title": "API Integration"
+          },
+          "data": {
+            "body": "add retry logic"
+          }
+        },
+        "latencyMs": 2888,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c08",
+        "prompt": "Create a task called Benchmark Charts and assign it to Priya in Research & Benchmarking project with medium priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "Benchmark Charts",
+            "assignee": "Priya",
+            "project": "Research & Benchmarking",
+            "priority": "medium"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "Benchmark Charts",
+            "assignee": "Priya",
+            "project": "Research & Benchmarking",
+            "priority": "medium"
+          }
+        },
+        "latencyMs": 3958,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 5,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c09",
+        "prompt": "Create task Dataset Cleaning for Amit in Research & Benchmarking project",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "Dataset Cleaning",
+            "assignee": "Amit",
+            "project": "Research & Benchmarking"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "Dataset Cleaning",
+            "assignee": "Amit",
+            "project": "Research & Benchmarking"
+          }
+        },
+        "latencyMs": 3503,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 4,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "c10",
+        "prompt": "Add Tanmay to Project: AI Command Engine project",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Tanmay",
+            "project": "AI Command Engine"
+          }
+        },
+        "actual": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Tanmay",
+            "project": "AI Command Engine"
+          }
+        },
+        "latencyMs": 2815,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "n01",
+        "prompt": "create task api integratn for tanmay in core platform",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "api integratn",
+            "assignee": "tanmay",
+            "project": "core platform"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "api integratn",
+            "assignee": "tanmay",
+            "project": "core platform"
+          }
+        },
+        "latencyMs": 3237,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 4,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "n02",
+        "prompt": "pls add rohan to core platform project",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "rohan",
+            "project": "core platform"
+          }
+        },
+        "actual": {
+          "action": "add_project_member",
+          "data": {
+            "user": "Rohan",
+            "project": "core platform"
+          }
+        },
+        "latencyMs": 2054,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 3,
+        "fieldAccuracy": 1,
+        "exact": true,
+        "intentCorrect": true
+      },
+      {
+        "id": "n03",
+        "prompt": "mk task model tuning assign amit project ai command engine",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "model tuning",
+            "assignee": "amit",
+            "project": "ai command engine"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "Mk task model tuning assign Amit project AI command engine",
+            "project": "Amit project AI command engine"
+          }
+        },
+        "latencyMs": 6045,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.25,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n04",
+        "prompt": "update task api integration status done",
+        "expected": {
+          "action": "update_task",
+          "filters": {
+            "title": "api integration"
+          },
+          "update": {
+            "status": "done"
+          }
+        },
+        "actual": {
+          "action": "update_task",
+          "filters": {
+            "title": "[TITLE]"
+          },
+          "update": {}
+        },
+        "latencyMs": 2401,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.3333333333333333,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n05",
+        "prompt": "create project called research v2 lead priya",
+        "expected": {
+          "action": "create_project",
+          "data": {
+            "name": "research v2",
+            "team_lead": "priya"
+          }
+        },
+        "actual": {
+          "action": "create_project",
+          "data": {
+            "name": "research v2"
+          },
+          "filters": {},
+          "update": {}
+        },
+        "latencyMs": 2753,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 2,
+        "fieldAccuracy": 0.6666666666666666,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n06",
+        "prompt": "assign ui polish to rohan due tomorrow",
+        "expected": {
+          "action": "assign",
+          "filters": {
+            "title": "ui polish"
+          },
+          "update": {
+            "assignee": "rohan",
+            "due_date": "tomorrow"
+          }
+        },
+        "actual": {
+          "action": "assign",
+          "data": {
+            "assignee": "Rohan",
+            "due_date": "tomorrow"
+          }
+        },
+        "latencyMs": 2758,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.25,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n07",
+        "prompt": "add comment in api integration task fix auth cache",
+        "expected": {
+          "action": "comment",
+          "filters": {
+            "title": "api integration"
+          },
+          "data": {
+            "body": "fix auth cache"
+          }
+        },
+        "actual": {
+          "action": "comment",
+          "filters": {
+            "title": "api integration task fix auth cache"
+          },
+          "data": {}
+        },
+        "latencyMs": 4719,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 1,
+        "fieldAccuracy": 0.3333333333333333,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n08",
+        "prompt": "create task called otp stability assign tanmay in project: ai command engine with high priority",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "otp stability",
+            "assignee": "tanmay",
+            "project": "ai command engine",
+            "priority": "high"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "otp stability",
+            "assignee": "Tanmay",
+            "project": "ai command engine with high priority",
+            "priority": "high"
+          }
+        },
+        "latencyMs": 3711,
+        "error": null,
+        "totalFields": 5,
+        "matchedFields": 4,
+        "fieldAccuracy": 0.8,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n09",
+        "prompt": "create benchmark-report task for priya under research & benchmarking",
+        "expected": {
+          "action": "create_task",
+          "data": {
+            "title": "benchmark-report",
+            "assignee": "priya",
+            "project": "research & benchmarking"
+          }
+        },
+        "actual": {
+          "action": "create_task",
+          "data": {
+            "title": "benchmark-report task",
+            "assignee": "priya",
+            "project": "research & benchmarking"
+          }
+        },
+        "latencyMs": 3380,
+        "error": null,
+        "totalFields": 4,
+        "matchedFields": 3,
+        "fieldAccuracy": 0.75,
+        "exact": false,
+        "intentCorrect": true
+      },
+      {
+        "id": "n10",
+        "prompt": "add project member amit to project: ai command engine",
+        "expected": {
+          "action": "add_project_member",
+          "data": {
+            "user": "amit",
+            "project": "ai command engine"
+          }
+        },
+        "actual": {
+          "action": "add_project_member",
+          "data": {
+            "user": "amit",
+            "project": "p"
+          }
+        },
+        "latencyMs": 2749,
+        "error": null,
+        "totalFields": 3,
+        "matchedFields": 2,
+        "fieldAccuracy": 0.6666666666666666,
+        "exact": false,
+        "intentCorrect": true
+      }
+    ]
+  }
+}

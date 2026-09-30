@@ -13,6 +13,7 @@ const notificationRepository = require('../repositories/notificationRepository')
 const { supabase, supabaseAdmin } = require('../config/supabase');
 
 const storageClient = supabaseAdmin || supabase;
+const DEFAULT_PROJECT_STATUS = 'planning';
 
 async function bestEffortRemoveStorageObjects(attachmentRows) {
   const rows = Array.isArray(attachmentRows) ? attachmentRows : [];
@@ -192,7 +193,7 @@ function createProject(req, res) {
       name,
       // Store Quill HTML (rich text) as-is
       description: richDescription,
-      status: status || null,
+      status: status || DEFAULT_PROJECT_STATUS,
       start_date: startDate || null,
       end_date: endDate || null,
       created_by: userId

@@ -4,7 +4,9 @@
  */
 export const API_CONFIG = {
   BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api',
-  TIMEOUT: 30000, // 30 seconds
+  TIMEOUT: 30000, // 30 seconds — default for most API calls
+  /** Ollama + workflow can exceed 30s on CPU; AI assistant uses this for /ai/process only */
+  AI_REQUEST_TIMEOUT_MS: Number(import.meta.env.VITE_AI_REQUEST_TIMEOUT_MS) || 120000,
 }
 
 /**

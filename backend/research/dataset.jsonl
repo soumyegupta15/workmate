@@ -1,0 +1,106 @@
+{"id":"c01","prompt":"Create a task called API Integration and assign it to Tanmay in Core Platform project with high priority","expected":{"action":"create_task","data":{"title":"API Integration","assignee":"Tanmay","project":"Core Platform","priority":"high"}}}
+{"id":"c02","prompt":"Create a task called UI Polish and assign it to Rohan in Core Platform project","expected":{"action":"create_task","data":{"title":"UI Polish","assignee":"Rohan","project":"Core Platform"}}}
+{"id":"c03","prompt":"Add project member Priya to project Core Platform","expected":{"action":"add_project_member","data":{"user":"Priya","project":"Core Platform"}}}
+{"id":"c04","prompt":"Create project called AI Sprint starting tomorrow","expected":{"action":"create_project","data":{"name":"AI Sprint","start_date":"tomorrow"}}}
+{"id":"c05","prompt":"Update task API Integration to in progress","expected":{"action":"update_task","filters":{"title":"API Integration"},"update":{"status":"in_progress"}}}
+{"id":"c06","prompt":"Assign task UI Polish to Amit by next week","expected":{"action":"assign","filters":{"title":"UI Polish"},"update":{"assignee":"Amit","due_date":"next week"}}}
+{"id":"c07","prompt":"Comment on task API Integration: add retry logic","expected":{"action":"comment","filters":{"title":"API Integration"},"data":{"body":"add retry logic"}}}
+{"id":"c08","prompt":"Create a task called Benchmark Charts and assign it to Priya in Research & Benchmarking project with medium priority","expected":{"action":"create_task","data":{"title":"Benchmark Charts","assignee":"Priya","project":"Research & Benchmarking","priority":"medium"}}}
+{"id":"c09","prompt":"Create task Dataset Cleaning for Amit in Research & Benchmarking project","expected":{"action":"create_task","data":{"title":"Dataset Cleaning","assignee":"Amit","project":"Research & Benchmarking"}}}
+{"id":"c10","prompt":"Add Tanmay to Project: AI Command Engine project","expected":{"action":"add_project_member","data":{"user":"Tanmay","project":"AI Command Engine"}}}
+{"id":"n01","prompt":"create task api integratn for tanmay in core platform","expected":{"action":"create_task","data":{"title":"api integratn","assignee":"tanmay","project":"core platform"}}}
+{"id":"n02","prompt":"pls add rohan to core platform project","expected":{"action":"add_project_member","data":{"user":"rohan","project":"core platform"}}}
+{"id":"n03","prompt":"mk task model tuning assign amit project ai command engine","expected":{"action":"create_task","data":{"title":"model tuning","assignee":"amit","project":"ai command engine"}}}
+{"id":"n04","prompt":"update task api integration status done","expected":{"action":"update_task","filters":{"title":"api integration"},"update":{"status":"done"}}}
+{"id":"n05","prompt":"create project called research v2 lead priya","expected":{"action":"create_project","data":{"name":"research v2","team_lead":"priya"}}}
+{"id":"n06","prompt":"assign ui polish to rohan due tomorrow","expected":{"action":"assign","filters":{"title":"ui polish"},"update":{"assignee":"rohan","due_date":"tomorrow"}}}
+{"id":"n07","prompt":"add comment in api integration task fix auth cache","expected":{"action":"comment","filters":{"title":"api integration"},"data":{"body":"fix auth cache"}}}
+{"id":"n08","prompt":"create task called otp stability assign tanmay in project: ai command engine with high priority","expected":{"action":"create_task","data":{"title":"otp stability","assignee":"tanmay","project":"ai command engine","priority":"high"}}}
+{"id":"n09","prompt":"create benchmark-report task for priya under research & benchmarking","expected":{"action":"create_task","data":{"title":"benchmark-report","assignee":"priya","project":"research & benchmarking"}}}
+{"id":"n10","prompt":"add project member amit to project: ai command engine","expected":{"action":"add_project_member","data":{"user":"amit","project":"ai command engine"}}}
+{"id":"a01","prompt":"Create task","expected":{"action":"create_task"}}
+{"id":"a02","prompt":"Assign it to Tanmay","expected":{"action":"assign","update":{"assignee":"Tanmay"}}}
+{"id":"a03","prompt":"In Core Platform project","expected":{"action":"create_task","data":{"project":"Core Platform"}}}
+{"id":"a04","prompt":"Update status to done for task API Integration","expected":{"action":"update_task","filters":{"title":"API Integration"},"update":{"status":"done"}}}
+{"id":"a05","prompt":"Add member Priya","expected":{"action":"add_project_member","data":{"user":"Priya"}}}
+{"id":"a06","prompt":"Create project named","expected":{"action":"create_project"}}
+{"id":"a07","prompt":"Comment: please close blockers on API Integration","expected":{"action":"comment","filters":{"title":"API Integration"},"data":{"body":"please close blockers on API Integration"}}}
+{"id":"a08","prompt":"Notify Amit that deployment is delayed","expected":{"action":"notify","data":{"user":"Amit"}}}
+{"id":"a09","prompt":"Assign tasks with status todo to Rohan","expected":{"action":"assign","filters":{"status":"todo"},"update":{"assignee":"Rohan"}}}
+{"id":"a10","prompt":"Update task called UI Polish priority high","expected":{"action":"update_task","filters":{"title":"UI Polish"},"update":{"priority":"high"}}}
+{"id":"c11","prompt":"Create a task called Notification Feed and assign it to Tanmay in Core Platform project with medium priority","expected":{"action":"create_task","data":{"title":"Notification Feed","assignee":"Tanmay","project":"Core Platform","priority":"medium"}}}
+{"id":"c12","prompt":"Create a task called Attachment Upload Reliability and assign it to Rohan in Core Platform project with high priority","expected":{"action":"create_task","data":{"title":"Attachment Upload Reliability","assignee":"Rohan","project":"Core Platform","priority":"high"}}}
+{"id":"c13","prompt":"Create a task called Team Member Invite UX and assign it to Priya in Core Platform project with medium priority","expected":{"action":"create_task","data":{"title":"Team Member Invite UX","assignee":"Priya","project":"Core Platform","priority":"medium"}}}
+{"id":"c14","prompt":"Update task UI Polish to in review","expected":{"action":"update_task","filters":{"title":"UI Polish"},"update":{"status":"in_review"}}}
+{"id":"c15","prompt":"Assign task Attachment Upload Reliability to Amit by tomorrow","expected":{"action":"assign","filters":{"title":"Attachment Upload Reliability"},"update":{"assignee":"Amit","due_date":"tomorrow"}}}
+{"id":"c16","prompt":"Comment on task UI Polish: please fix responsive padding","expected":{"action":"comment","filters":{"title":"UI Polish"},"data":{"body":"please fix responsive padding"}}}
+{"id":"c17","prompt":"Create a task called Intent Evaluation Script and assign it to Amit in Project: AI Command Engine project with high priority","expected":{"action":"create_task","data":{"title":"Intent Evaluation Script","assignee":"Amit","project":"AI Command Engine","priority":"high"}}}
+{"id":"c18","prompt":"Create a task called Schema Validation Layer and assign it to Tanmay in Project: AI Command Engine project with high priority","expected":{"action":"create_task","data":{"title":"Schema Validation Layer","assignee":"Tanmay","project":"AI Command Engine","priority":"high"}}}
+{"id":"c19","prompt":"Create a task called Better Error Messages and assign it to Rohan in Project: AI Command Engine project with medium priority","expected":{"action":"create_task","data":{"title":"Better Error Messages","assignee":"Rohan","project":"AI Command Engine","priority":"medium"}}}
+{"id":"c20","prompt":"Update task Intent Evaluation Script to done","expected":{"action":"update_task","filters":{"title":"Intent Evaluation Script"},"update":{"status":"done"}}}
+{"id":"c21","prompt":"Add project member Amit to project Project: AI Command Engine","expected":{"action":"add_project_member","data":{"user":"Amit","project":"AI Command Engine"}}}
+{"id":"c22","prompt":"Create a task called Dataset Expansion and assign it to Amit in Research & Benchmarking project with high priority","expected":{"action":"create_task","data":{"title":"Dataset Expansion","assignee":"Amit","project":"Research & Benchmarking","priority":"high"}}}
+{"id":"c23","prompt":"Create a task called Results Table for Report and assign it to Priya in Research & Benchmarking project with medium priority","expected":{"action":"create_task","data":{"title":"Results Table for Report","assignee":"Priya","project":"Research & Benchmarking","priority":"medium"}}}
+{"id":"c24","prompt":"Assign task Results Table for Report to Priya by end of this month","expected":{"action":"assign","filters":{"title":"Results Table for Report"},"update":{"assignee":"Priya","due_date":"end of this month"}}}
+{"id":"c25","prompt":"Comment on task Dataset Expansion: include typos and Hinglish cases","expected":{"action":"comment","filters":{"title":"Dataset Expansion"},"data":{"body":"include typos and Hinglish cases"}}}
+
+{"id":"n11","prompt":"cr8 task notif feed for tanmay core platform high","expected":{"action":"create_task","data":{"title":"notif feed","assignee":"tanmay","project":"core platform","priority":"high"}}}
+{"id":"n12","prompt":"add prj member priya core platform","expected":{"action":"add_project_member","data":{"user":"priya","project":"core platform"}}}
+{"id":"n13","prompt":"update ui polish -> done","expected":{"action":"update_task","filters":{"title":"ui polish"},"update":{"status":"done"}}}
+{"id":"n14","prompt":"assign attachment upload reliability to rohan by next monday","expected":{"action":"assign","filters":{"title":"attachment upload reliability"},"update":{"assignee":"rohan","due_date":"next monday"}}}
+{"id":"n15","prompt":"comment api integration: needs better logs","expected":{"action":"comment","filters":{"title":"api integration"},"data":{"body":"needs better logs"}}}
+{"id":"n16","prompt":"create task eval script for amit in project ai command engine urgent","expected":{"action":"create_task","data":{"title":"eval script","assignee":"amit","project":"ai command engine","priority":"urgent"}}}
+{"id":"n17","prompt":"create task schema validator assign tanmay project:ai command engine","expected":{"action":"create_task","data":{"title":"schema validator","assignee":"tanmay","project":"ai command engine"}}}
+{"id":"n18","prompt":"make task results table report for priya in research & benchmarking","expected":{"action":"create_task","data":{"title":"results table report","assignee":"priya","project":"research & benchmarking"}}}
+{"id":"n19","prompt":"assign results table report to priya due end of this month","expected":{"action":"assign","filters":{"title":"results table report"},"update":{"assignee":"priya","due_date":"end of this month"}}}
+{"id":"n20","prompt":"add tanmay to project ai cmd engine","expected":{"action":"add_project_member","data":{"user":"tanmay","project":"ai cmd engine"}}}
+
+{"id":"a11","prompt":"Create a task called Fix bug","expected":{"action":"create_task","data":{"title":"Fix bug"}}}
+{"id":"a12","prompt":"Assign to Rohan","expected":{"action":"assign","update":{"assignee":"Rohan"}}}
+{"id":"a13","prompt":"In Research & Benchmarking","expected":{"action":"create_task","data":{"project":"Research & Benchmarking"}}}
+{"id":"a14","prompt":"Set priority high","expected":{"action":"update_task","update":{"priority":"high"}}}
+{"id":"a15","prompt":"Due tomorrow","expected":{"action":"assign","update":{"due_date":"tomorrow"}}}
+{"id":"a16","prompt":"Update task status","expected":{"action":"update_task"}}
+{"id":"a17","prompt":"Add member","expected":{"action":"add_project_member"}}
+{"id":"a18","prompt":"Notify Tanmay: check failing tests","expected":{"action":"notify","data":{"user":"Tanmay"}}}
+{"id":"a19","prompt":"Comment: looks good","expected":{"action":"comment","data":{"body":"looks good"}}}
+{"id":"a20","prompt":"Assign task API Integration to Tanmay","expected":{"action":"assign","filters":{"title":"API Integration"},"update":{"assignee":"Tanmay"}}}
+
+{"id":"c26","prompt":"Create a task called Kanban Drag Drop Polishing and assign it to Rohan in Core Platform project with medium priority","expected":{"action":"create_task","data":{"title":"Kanban Drag Drop Polishing","assignee":"Rohan","project":"Core Platform","priority":"medium"}}}
+{"id":"c27","prompt":"Create a task called Password Reset OTP Flow and assign it to Tanmay in Core Platform project with high priority","expected":{"action":"create_task","data":{"title":"Password Reset OTP Flow","assignee":"Tanmay","project":"Core Platform","priority":"high"}}}
+{"id":"c28","prompt":"Update task Password Reset OTP Flow to in progress","expected":{"action":"update_task","filters":{"title":"Password Reset OTP Flow"},"update":{"status":"in_progress"}}}
+{"id":"c29","prompt":"Assign task Kanban Drag Drop Polishing to Priya by this friday","expected":{"action":"assign","filters":{"title":"Kanban Drag Drop Polishing"},"update":{"assignee":"Priya","due_date":"this friday"}}}
+{"id":"c30","prompt":"Comment on task Kanban Drag Drop Polishing: add keyboard support","expected":{"action":"comment","filters":{"title":"Kanban Drag Drop Polishing"},"data":{"body":"add keyboard support"}}}
+{"id":"c31","prompt":"Create a task called Project Matching Improvement and assign it to Amit in Project: AI Command Engine project with high priority","expected":{"action":"create_task","data":{"title":"Project Matching Improvement","assignee":"Amit","project":"AI Command Engine","priority":"high"}}}
+{"id":"c32","prompt":"Update task Project Matching Improvement to in progress","expected":{"action":"update_task","filters":{"title":"Project Matching Improvement"},"update":{"status":"in_progress"}}}
+{"id":"c33","prompt":"Create a task called Prompt Robustness Tests and assign it to Priya in Research & Benchmarking project with high priority","expected":{"action":"create_task","data":{"title":"Prompt Robustness Tests","assignee":"Priya","project":"Research & Benchmarking","priority":"high"}}}
+{"id":"c34","prompt":"Update task Prompt Robustness Tests to in review","expected":{"action":"update_task","filters":{"title":"Prompt Robustness Tests"},"update":{"status":"in_review"}}}
+{"id":"c35","prompt":"Assign task Prompt Robustness Tests to Priya by +2 days","expected":{"action":"assign","filters":{"title":"Prompt Robustness Tests"},"update":{"assignee":"Priya","due_date":"+2 days"}}}
+
+{"id":"n21","prompt":"cr task kanban polish rohan core platform med","expected":{"action":"create_task","data":{"title":"kanban polish","assignee":"rohan","project":"core platform","priority":"medium"}}}
+{"id":"n22","prompt":"upd task password reset otp flow in progress","expected":{"action":"update_task","filters":{"title":"password reset otp flow"},"update":{"status":"in_progress"}}}
+{"id":"n23","prompt":"assign kanban drag drop polishing to priya by this friday","expected":{"action":"assign","filters":{"title":"kanban drag drop polishing"},"update":{"assignee":"priya","due_date":"this friday"}}}
+{"id":"n24","prompt":"comment kanban drag drop polishing: works on chrome only","expected":{"action":"comment","filters":{"title":"kanban drag drop polishing"},"data":{"body":"works on chrome only"}}}
+{"id":"n25","prompt":"create task project matching improvement amit project ai command engine","expected":{"action":"create_task","data":{"title":"project matching improvement","assignee":"amit","project":"ai command engine"}}}
+{"id":"n26","prompt":"update prompt robustness tests to in review","expected":{"action":"update_task","filters":{"title":"prompt robustness tests"},"update":{"status":"in_review"}}}
+{"id":"n27","prompt":"assign prompt robustness tests priya due +2 days","expected":{"action":"assign","filters":{"title":"prompt robustness tests"},"update":{"assignee":"priya","due_date":"+2 days"}}}
+{"id":"n28","prompt":"add rohan to project: ai command engine pls","expected":{"action":"add_project_member","data":{"user":"rohan","project":"ai command engine"}}}
+{"id":"n29","prompt":"add prj member tanmay research & benchmarking","expected":{"action":"add_project_member","data":{"user":"tanmay","project":"research & benchmarking"}}}
+{"id":"n30","prompt":"create task charts n tables priya research & benchmarking high","expected":{"action":"create_task","data":{"title":"charts n tables","assignee":"priya","project":"research & benchmarking","priority":"high"}}}
+
+{"id":"a21","prompt":"Core Platform project","expected":{"action":"create_task","data":{"project":"Core Platform"}}}
+{"id":"a22","prompt":"AI Command Engine","expected":{"action":"create_task","data":{"project":"AI Command Engine"}}}
+{"id":"a23","prompt":"Research & Benchmarking","expected":{"action":"create_task","data":{"project":"Research & Benchmarking"}}}
+{"id":"a24","prompt":"Assign to Amit by next week","expected":{"action":"assign","update":{"assignee":"Amit","due_date":"next week"}}}
+{"id":"a25","prompt":"Update API Integration priority urgent","expected":{"action":"update_task","filters":{"title":"API Integration"},"update":{"priority":"urgent"}}}
+{"id":"a26","prompt":"Update UI Polish due tomorrow","expected":{"action":"update_task","filters":{"title":"UI Polish"},"update":{"due_date":"tomorrow"}}}
+{"id":"a27","prompt":"Update task: UI Polish","expected":{"action":"update_task","filters":{"title":"UI Polish"}}}
+{"id":"a28","prompt":"Assign task: UI Polish","expected":{"action":"assign","filters":{"title":"UI Polish"}}}
+{"id":"a29","prompt":"Add project member: Amit","expected":{"action":"add_project_member","data":{"user":"Amit"}}}
+{"id":"a30","prompt":"Create project called Core Platform v2","expected":{"action":"create_project","data":{"name":"Core Platform v2"}}}
+
+{"id":"c36","prompt":"Create a task called Admin Role Review and assign it to Priya in Core Platform project with medium priority","expected":{"action":"create_task","data":{"title":"Admin Role Review","assignee":"Priya","project":"Core Platform","priority":"medium"}}}
+{"id":"c37","prompt":"Create a task called Fix Project Search Matching and assign it to Amit in Project: AI Command Engine project with high priority","expected":{"action":"create_task","data":{"title":"Fix Project Search Matching","assignee":"Amit","project":"AI Command Engine","priority":"high"}}}
+{"id":"c38","prompt":"Create a task called Report Methodology Section and assign it to Priya in Research & Benchmarking project with medium priority","expected":{"action":"create_task","data":{"title":"Report Methodology Section","assignee":"Priya","project":"Research & Benchmarking","priority":"medium"}}}
+{"id":"c39","prompt":"Update task Report Methodology Section to done","expected":{"action":"update_task","filters":{"title":"Report Methodology Section"},"update":{"status":"done"}}}
+{"id":"c40","prompt":"Assign task Admin Role Review to Tanmay by next week","expected":{"action":"assign","filters":{"title":"Admin Role Review"},"update":{"assignee":"Tanmay","due_date":"next week"}}}

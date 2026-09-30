@@ -76,7 +76,7 @@ export const theme = {
     card: '0 18px 40px rgba(15, 23, 42, 0.7)',
   },
   layout: {
-    maxCardWidth: '420px',
+    maxCardWidth: '520px',
   },
 }
 

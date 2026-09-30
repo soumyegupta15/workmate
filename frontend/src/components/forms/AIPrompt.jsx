@@ -4,6 +4,9 @@ import { useTheme } from '../../context/theme';
 import PrimaryButton from '../buttons/PrimaryButton';
 import Loader from '../ui/Loader';
 
+const getDraftStorageKey = (orgId, compact) =>
+  `workmate-ai-draft:${orgId || 'global'}:${compact ? 'compact' : 'full'}`;
+
 const AIPrompt = ({ orgId, onSuccess, onError, compact = false }) => {
   const t = useTheme();
   const [messages, setMessages] = useState([
@@ -33,6 +36,31 @@ const AIPrompt = ({ orgId, onSuccess, onError, compact = false }) => {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    const storageKey = getDraftStorageKey(orgId, compact);
+    try {
+      const savedDraft = localStorage.getItem(storageKey);
+      if (savedDraft) {
+        setInput(savedDraft);
+      }
+    } catch {
+      // Ignore localStorage read failures.
+    }
+  }, [orgId, compact]);
+
+  useEffect(() => {
+    const storageKey = getDraftStorageKey(orgId, compact);
+    try {
+      if (input.trim()) {
+        localStorage.setItem(storageKey, input);
+      } else {
+        localStorage.removeItem(storageKey);
+      }
+    } catch {
+      // Ignore localStorage write failures.
+    }
+  }, [input, orgId, compact]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -40,30 +68,30 @@ const AIPrompt = ({ orgId, onSuccess, onError, compact = false }) => {
       return;
     }
 
+    const submittedInput = input.trim();
+
     const userMessage = {
       id: Date.now(),
       type: 'user',
-      content: input.trim(),
+      content: submittedInput,
       timestamp: new Date(),
     };
 
     setMessages(prev => [...prev, userMessage]);
-    setInput('');
     setLoading(true);
 
     try {
       // Send conversation context along with the prompt
       const response = await processAndExecute(
-        input.trim(), 
+        submittedInput,
         orgId,
         conversationContext
       );
       
       // Check if response indicates a question (missing fields)
       const isQuestion = response?.data?.isQuestion || false;
-      const responseMessage = response?.data?.message || '';
+      let responseMessage = response?.data?.message || '';
       const updatedContext = response?.data?.context || null;
-      const action = response?.data?.action || null;
       
       // Update conversation context if provided
       if (updatedContext) {
@@ -146,6 +174,13 @@ const AIPrompt = ({ orgId, onSuccess, onError, compact = false }) => {
         if (onSuccess) {
           onSuccess(response.data || response);
         }
+
+        setInput('');
+        try {
+          localStorage.removeItem(getDraftStorageKey(orgId, compact));
+        } catch {
+          // Ignore localStorage failures.
+        }
         
         // Trigger a refresh of the page data immediately
         // Use a more reliable refresh method
@@ -176,6 +211,7 @@ const AIPrompt = ({ orgId, onSuccess, onError, compact = false }) => {
       };
 
       setMessages(prev => [...prev, errorMsg]);
+      setInput(submittedInput);
       
       if (onError && !isQuestion) {
         onError(err);
